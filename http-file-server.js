@@ -1,10 +1,9 @@
 const fs = require('fs');
 const http = require('http');
 
-const filename = process.argv[3];
-
-server = http.createServer(function(request, response) {
-//fs.createReadStream method, stream the file contents to the response 
-  fs.createReadStream(filename).pipe(response);
+server = http.createServer(function(req, res) {
+    res.writeHead(200, {'content-type': 'text/plain'})
+    //fs.createReadStream method, stream the file contents to the response 
+    fs.createReadStream(process.argv[3]).pipe(res);
 });
-server.listen(process.argv[2]);
+server.listen(Number(process.argv[2]));
